@@ -25,7 +25,7 @@ function viewCarBalance() {
 function getCurrency(userData, msg) {
   currency = prompt(msg).toUpperCase();
   while (userData[currency] === undefined) {
-    currency = prompt(msg);
+    currency = prompt(msg).toUpperCase();
   }
   return currency;
 
@@ -56,13 +56,6 @@ function getBalance(currency) {
 
 function displayAnswer(value) {
   console.log(`Your balance: currency ${currency} and balance is : ${value}`);
-}
-
-function getUserInput(message) {
-  return new Promise((resolve) => {
-    const input = prompt(message);
-    resolve(input);
-  });
 }
 
 function getMoney(userData, bankData) {
