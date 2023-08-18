@@ -16,7 +16,6 @@ let userData = {
 };
 
 function viewCarBalance() {
-  let result;
   cardBalanceReply = confirm('View card balance?');
   if (cardBalanceReply !== null) {
     return cardBalanceReply;
@@ -59,11 +58,20 @@ function displayAnswer(value) {
   console.log(`Your balance: currency ${currency} and balance is : ${value}`);
 }
 
+function getUserInput(message) {
+  return new Promise((resolve) => {
+    const input = prompt(message);
+    resolve(input);
+  });
+}
+
 function getMoney(userData, bankData) {
 
   let resultPromise = new Promise((resolve, reject) => {
-    viewCarBalance() === true ? resolve(userData) : reject(
+
+    viewCarBalance("View card balance") === true ? resolve(userData) : reject(
         {userData: userData, bankData: bankData});
+
   }).then(result => {
     return getCurrency(result,
         'Enter the currency for which the balance will be: ');
@@ -78,7 +86,9 @@ function getMoney(userData, bankData) {
     getAmountToGetCash(cur);
 
   })
-  .finally(console.log("Thanks ,have a good day"));
+  .finally(() => {
+    console.log("Thanks ,have a good day");
+  });
 
 }
 
